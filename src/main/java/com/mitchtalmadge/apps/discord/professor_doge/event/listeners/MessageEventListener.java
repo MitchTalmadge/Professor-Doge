@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class MessageEventListener implements EventListener<MessageReceivedEvent> {
 
-    private static final String COMMAND_PREFIX = ".pd ";
+    public static final String COMMAND_PREFIX = ".pd";
 
     @Override
     public void onEvent(MessageReceivedEvent event) {
@@ -17,9 +17,9 @@ public class MessageEventListener implements EventListener<MessageReceivedEvent>
         switch (event.getChannelType()) {
             case TEXT:
                 // Check for Command Prefix
-                if (event.getMessage().getRawContent().startsWith(COMMAND_PREFIX)) {
+                if (event.getMessage().getRawContent().startsWith(COMMAND_PREFIX + " ")) {
                     // Split the message into arguments
-                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length()).split("\\s");
+                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length() + 1).split("\\s");
 
                     // Create a command instance
                     Command command = new Command(event, args);

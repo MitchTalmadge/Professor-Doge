@@ -38,11 +38,26 @@
     </repositories>
 
     <dependencies>
+        <!-- Discord-->
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>3.2.0_241</version>
         </dependency>
+
+        <!-- Crypto -->
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-core</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-gdax</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+
+        <!-- Utils -->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>

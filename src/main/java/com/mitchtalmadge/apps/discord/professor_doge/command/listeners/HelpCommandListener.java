@@ -3,7 +3,7 @@ package com.mitchtalmadge.apps.discord.professor_doge.command.listeners;
 import com.mitchtalmadge.apps.discord.professor_doge.command.Command;
 import com.mitchtalmadge.apps.discord.professor_doge.command.CommandPattern;
 
-@CommandPattern(value = {"help"}, strict = true)
+@CommandPattern(value = {"help"}, strict = false)
 public class HelpCommandListener implements CommandListener {
 
     @Override

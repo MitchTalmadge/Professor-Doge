@@ -2,7 +2,6 @@ package com.mitchtalmadge.apps.discord.professor_doge;
 
 import com.mitchtalmadge.apps.discord.professor_doge.event.EventDistributor;
 import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
@@ -20,7 +19,7 @@ public class ProfessorDoge {
         }
 
         try {
-            JDA jda = new JDABuilder(AccountType.BOT)
+            new JDABuilder(AccountType.BOT)
                     .setToken(DISCORD_TOKEN)
                     .addEventListener(new EventDistributor())
                     .buildBlocking();
