@@ -83,7 +83,8 @@ public class CommandDistributor {
 
         // Send the command to the proper listener, or send an error message if no listener matched the command.
         if (mostSpecificListener == null) {
-            command.getMessageReceivedEvent().getChannel().sendMessage("doge does not know what human wants?!").queue();
+            command.getMessageReceivedEvent().getChannel().sendMessage("Doge does not understand...").queue();
+            onCommand(new Command(command.getMessageReceivedEvent(), new String[]{"help"}));
         } else {
             String response = mostSpecificListener.onCommand(command);
             if (response != null) {

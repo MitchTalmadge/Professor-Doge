@@ -19,7 +19,7 @@ public class MessageEventListener implements EventListener<MessageReceivedEvent>
                 // Check for Command Prefix
                 if (event.getMessage().getRawContent().startsWith(COMMAND_PREFIX + " ")) {
                     // Split the message into arguments
-                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length() + 1).split("\\s");
+                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length() + 1).toLowerCase().split("\\s");
 
                     // Create a command instance
                     Command command = new Command(event, args);
