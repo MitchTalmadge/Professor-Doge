@@ -1,13 +1,11 @@
 package com.mitchtalmadge.apps.discord.professor_doge.crypto;
 
-import com.mitchtalmadge.apps.discord.professor_doge.crypto.cron.GeneralTickerCacher;
 import com.mitchtalmadge.apps.discord.professor_doge.service.LogService;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,18 +26,10 @@ public class CryptocurrencyService {
     }
 
     private final LogService logService;
-    private final GeneralTickerCacher generalTickerCacher;
 
     @Autowired
-    public CryptocurrencyService(LogService logService,
-                                 GeneralTickerCacher generalTickerCacher) {
+    public CryptocurrencyService(LogService logService) {
         this.logService = logService;
-        this.generalTickerCacher = generalTickerCacher;
-    }
-
-    @PostConstruct
-    private void init() {
-        this.generalTickerCacher.updateAllPrices();
     }
 
     /**

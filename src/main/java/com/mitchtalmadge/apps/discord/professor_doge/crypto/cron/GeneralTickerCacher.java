@@ -5,7 +5,6 @@ import com.mitchtalmadge.apps.discord.professor_doge.service.LogService;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -61,17 +60,17 @@ public class GeneralTickerCacher {
     private final LogService logService;
 
     @Autowired
-    public GeneralTickerCacher(@Lazy SpecificTickerCacher specificTickerCacher,
+    public GeneralTickerCacher(SpecificTickerCacher specificTickerCacher,
                                LogService logService) {
         this.specificTickerCacher = specificTickerCacher;
         this.logService = logService;
     }
 
     /**
-     * Loads and caches the prices of crypto currencies every 5 minutes.
+     * Loads and caches the prices of crypto currencies every 2 minutes.
      */
     @Async
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(initialDelay = 0, fixedDelay = 120_000)
     public void updateAllPrices() {
 
         logService.logInfo(getClass(), "Updating Prices.");

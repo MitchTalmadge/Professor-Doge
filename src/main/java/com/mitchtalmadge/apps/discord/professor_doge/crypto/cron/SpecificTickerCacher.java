@@ -7,7 +7,6 @@ import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class SpecificTickerCacher {
     private final LogService logService;
 
     @Autowired
-    public SpecificTickerCacher(@Lazy CryptocurrencyService cryptocurrencyService,
+    public SpecificTickerCacher(CryptocurrencyService cryptocurrencyService,
                                 LogService logService) {
         this.cryptocurrencyService = cryptocurrencyService;
         this.logService = logService;
