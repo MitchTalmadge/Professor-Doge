@@ -1,66 +1,51 @@
 package com.mitchtalmadge.apps.discord.professor_doge.crypto;
 
+import com.mitchtalmadge.apps.discord.professor_doge.crypto.cache.TickerCacheService;
 import com.mitchtalmadge.apps.discord.professor_doge.service.LogService;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.math.BigDecimal;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 public class CryptocurrencyService {
 
-    /**
-     * The cache containing a reference to each Exchange, their currency pairs, and their respective tickets.
-     */
-    private static final Map<ExchangeReference, Map<CurrencyPair, Ticker>> TICKER_CACHE = new ConcurrentHashMap<>();
-
-    static {
-        // Initialize the cache.
-        for (ExchangeReference reference : ExchangeReference.values()) {
-            TICKER_CACHE.put(reference, new HashMap<>());
-        }
-    }
-
     private final LogService logService;
+    private final TickerCacheService tickerCacheService;
 
     @Autowired
-    public CryptocurrencyService(LogService logService) {
+    public CryptocurrencyService(LogService logService,
+                                 TickerCacheService tickerCacheService) {
         this.logService = logService;
+        this.tickerCacheService = tickerCacheService;
     }
 
     /**
-     * Updates the cache of the Exchange in the Ticker Cache.
+     * Gets all the queryable CurrencyPairs for an Exchange.
+     * <p>
+     * CurrencyPairs will be sorted alphabetically, starting with the base, then the counter.
      *
-     * @param reference     The reference to the Exchange whose cache is being updated.
-     * @param exchangeCache The cache of the Exchange.
+     * @param exchangeReference The reference to the Exchange.
+     * @return A Set containing the CurrencyPairs which can be queried for this Exchange.
      */
-    public void updateExchangeCache(ExchangeReference reference, Map<CurrencyPair, Ticker> exchangeCache) {
-        TICKER_CACHE.put(reference, exchangeCache);
-        logService.logInfo(getClass(), "Cached " + exchangeCache.size() + " Tickers for " + reference.name());
+    public Set<CurrencyPair> getExchangeCurrencyPairs(ExchangeReference exchangeReference) {
+        return new TreeSet<>(this.tickerCacheService.getCachedCurrencyPairsForExchange(exchangeReference));
     }
 
     /**
-     * Retrieves the cached Ticker for the given Exchange and Currency Pair.
+     * Determines the price of a CurrencyPair for an Exchange.
      *
-     * @param exchangeReference The ExchangeReference for the desired Exchange.
-     * @param currencyPair      The CurrencyPair of the Ticker.
-     * @return The Ticker, if one exists.
+     * @param exchangeReference The Exchange.
+     * @param currencyPair      The CurrencyPair.
+     * @return The price of the CurrencyPair on the Exchange, or null if the CurrencyPair is not on the Exchange.
      */
-    public static Ticker getTicker(ExchangeReference exchangeReference, CurrencyPair currencyPair) {
-        return TICKER_CACHE.get(exchangeReference).get(currencyPair);
-    }
-
-    public static String getGDAXPrice(CurrencyPair currencyPair) {
-        Ticker ticker = getTicker(ExchangeReference.GDAX, currencyPair);
-
-        if (ticker != null)
-            return ticker.getBid() + " " + currencyPair.counter.getCurrencyCode();
-
-        return null;
+    public BigDecimal getPrice(ExchangeReference exchangeReference, CurrencyPair currencyPair) {
+        Ticker ticker = this.tickerCacheService.getTicker(exchangeReference, currencyPair);
+        return ticker != null ? ticker.getBid() : null;
     }
 
 }

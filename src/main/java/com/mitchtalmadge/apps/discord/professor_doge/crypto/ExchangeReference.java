@@ -16,24 +16,30 @@ import org.knowm.xchange.service.marketdata.MarketDataService;
 
 public enum ExchangeReference {
 
-    BITFINEX(BitfinexExchange.class),
-    BITSTAMP(BitstampExchange.class),
-    BITTREX(BittrexExchange.class),
-    CCEX(CCEXExchange.class),
-    CEXIO(CexIOExchange.class),
-    COINBASE(CoinbaseExchange.class),
-    GDAX(GDAXExchange.class),
-    GEMINI(GeminiExchange.class),
-    KRAKEN(KrakenExchange.class),
-    POLONIEX(PoloniexExchange.class);
+    BITFINEX("Bitfinex", BitfinexExchange.class),
+    BITSTAMP("Bitstamp", BitstampExchange.class),
+    BITTREX("Bittrex", BittrexExchange.class),
+    CCEX("CCEX", CCEXExchange.class),
+    CEXIO("CexIO", CexIOExchange.class),
+    COINBASE("Coinbase", CoinbaseExchange.class),
+    GDAX("GDAX", GDAXExchange.class),
+    GEMINI("Gemini", GeminiExchange.class),
+    KRAKEN("Kraken", KrakenExchange.class),
+    POLONIEX("Poloniex", PoloniexExchange.class);
 
 
+    private final String exchangeName;
     private final Class<? extends BaseExchange> exchangeClass;
     private final MarketDataService marketDataService;
 
-    ExchangeReference(Class<? extends BaseExchange> exchangeClass) {
+    ExchangeReference(String exchangeName, Class<? extends BaseExchange> exchangeClass) {
+        this.exchangeName = exchangeName;
         this.exchangeClass = exchangeClass;
         this.marketDataService = ExchangeFactory.INSTANCE.createExchange(exchangeClass.getName()).getMarketDataService();
+    }
+
+    public String getExchangeName() {
+        return exchangeName;
     }
 
     public Class<? extends BaseExchange> getExchangeClass() {
@@ -42,6 +48,20 @@ public enum ExchangeReference {
 
     public MarketDataService getMarketDataService() {
         return this.marketDataService;
+    }
+
+    /**
+     * Finds an ExchangeReference with the given Exchange name.
+     *
+     * @param exchangeName The name of the Exchange.
+     * @return The matching ExchangeReference, or null if none matched.
+     */
+    public static ExchangeReference getByExchangeName(String exchangeName) {
+        for (ExchangeReference exchangeReference : values())
+            if (exchangeReference.exchangeName.equalsIgnoreCase(exchangeName))
+                return exchangeReference;
+
+        return null;
     }
 
 }

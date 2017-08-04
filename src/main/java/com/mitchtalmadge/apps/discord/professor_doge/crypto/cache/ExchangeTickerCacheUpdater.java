@@ -1,6 +1,5 @@
-package com.mitchtalmadge.apps.discord.professor_doge.crypto.cron;
+package com.mitchtalmadge.apps.discord.professor_doge.crypto.cache;
 
-import com.mitchtalmadge.apps.discord.professor_doge.crypto.CryptocurrencyService;
 import com.mitchtalmadge.apps.discord.professor_doge.crypto.ExchangeReference;
 import com.mitchtalmadge.apps.discord.professor_doge.service.LogService;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -8,32 +7,31 @@ import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
-@Service
-public class SpecificTickerCacher {
+@Component
+class ExchangeTickerCacheUpdater {
 
-    private final CryptocurrencyService cryptocurrencyService;
     private final LogService logService;
 
     @Autowired
-    public SpecificTickerCacher(CryptocurrencyService cryptocurrencyService,
-                                LogService logService) {
-        this.cryptocurrencyService = cryptocurrencyService;
+    public ExchangeTickerCacheUpdater(LogService logService) {
         this.logService = logService;
     }
 
     /**
-     * Updates the prices for a specific Exchange and stores them within the {@link CryptocurrencyService} Ticker Cache.
+     * Updates the Tickers for a specific Exchange.
      *
      * @param reference The reference to the Exchange.
+     * @return The cached Tickers.
      */
     @SuppressWarnings("WeakerAccess")
     @Async
-    public void updatePricesForExchange(ExchangeReference reference) {
+    public CompletableFuture<Map<CurrencyPair, Ticker>> updateExchangeCache(ExchangeReference reference) {
         // Create a cache for the Exchange.
         Map<CurrencyPair, Ticker> exchangeCache = new HashMap<>();
 
@@ -41,7 +39,7 @@ public class SpecificTickerCacher {
         MarketDataService marketDataService = reference.getMarketDataService();
 
         // Try the Currency Pairs.
-        for (CurrencyPair currencyPair : GeneralTickerCacher.CURRENCY_PAIRS) {
+        for (CurrencyPair currencyPair : TickerCacheService.CURRENCY_PAIRS) {
             Ticker ticker = null;
 
             // Try to get the Ticker for this CurrencyPair.
@@ -59,7 +57,7 @@ public class SpecificTickerCacher {
             }
         }
 
-        cryptocurrencyService.updateExchangeCache(reference, exchangeCache);
+        return CompletableFuture.completedFuture(exchangeCache);
     }
 
 }

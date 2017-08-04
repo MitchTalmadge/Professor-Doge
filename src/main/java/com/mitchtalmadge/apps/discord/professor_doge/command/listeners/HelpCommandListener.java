@@ -14,9 +14,9 @@ public class HelpCommandListener extends CommandListener {
 
         if (command.getArgs().length > 1) {
             switch (command.getArgs()[1]) {
-                case "crypto":
-                    helpContent = "crypto: General Overview\n" +
-                            "crypto [gdax|bitnifex|poloniex]: Exchange Overview";
+                case "c":
+                    helpContent = "Cryptocurrency: General Overview\n" +
+                            "c [gdax|bitnifex|poloniex]: Exchange Overview";
             }
         }
 
@@ -32,7 +32,7 @@ public class HelpCommandListener extends CommandListener {
         if (helpContent != null)
             message += helpContent + "\n";
         else
-            message += "crypto: Cryptography Info\n";
+            message += "c: Cryptocurrency Info\n";
 
         message += "```";
 

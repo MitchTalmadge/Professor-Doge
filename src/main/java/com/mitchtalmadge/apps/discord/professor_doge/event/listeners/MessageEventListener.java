@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class MessageEventListener extends EventListener<MessageReceivedEvent> {
 
-    private static final String COMMAND_PREFIX = ".pd";
+    private static final String COMMAND_PREFIX = ",";
 
     private final CommandDistributor commandDistributor;
 
@@ -25,9 +25,9 @@ public class MessageEventListener extends EventListener<MessageReceivedEvent> {
         switch (event.getChannelType()) {
             case TEXT:
                 // Check for Command Prefix
-                if (event.getMessage().getRawContent().startsWith(COMMAND_PREFIX + " ")) {
+                if (event.getMessage().getRawContent().startsWith(COMMAND_PREFIX)) {
                     // Split the message into arguments
-                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length() + 1).toLowerCase().split("\\s");
+                    String[] args = event.getMessage().getRawContent().substring(COMMAND_PREFIX.length()).toLowerCase().split("\\s");
 
                     // Create a command instance
                     Command command = new Command(event, args);

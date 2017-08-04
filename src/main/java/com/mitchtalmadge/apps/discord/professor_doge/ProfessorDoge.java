@@ -12,8 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @EnableAsync
-@ComponentScan(basePackages = "com.mitchtalmadge.apps.discord.professor_doge",
-        includeFilters = @ComponentScan.Filter(InheritedComponent.class))
+@ComponentScan(includeFilters = @ComponentScan.Filter(InheritedComponent.class))
 @SpringBootApplication
 public class ProfessorDoge {
 
