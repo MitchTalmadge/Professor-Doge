@@ -3,12 +3,19 @@ package com.mitchtalmadge.apps.discord.professor_doge.command.listeners.crypto;
 import com.mitchtalmadge.apps.discord.professor_doge.command.Command;
 import com.mitchtalmadge.apps.discord.professor_doge.command.CommandPattern;
 import com.mitchtalmadge.apps.discord.professor_doge.command.listeners.CommandListener;
-import com.mitchtalmadge.apps.discord.professor_doge.crypto.CryptoInfoLoader;
+import com.mitchtalmadge.apps.discord.professor_doge.crypto.CryptocurrencyService;
 import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.currency.CurrencyPair;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @CommandPattern({"crypto"})
-public class CryptoCommandListener implements CommandListener {
+public class CryptoCommandListener extends CommandListener {
+
+    private final CryptocurrencyService cryptocurrencyService;
+
+    @Autowired
+    public CryptoCommandListener(CryptocurrencyService cryptocurrencyService) {
+        this.cryptocurrencyService = cryptocurrencyService;
+    }
 
     @Override
     public String onCommand(Command command) {
@@ -29,11 +36,11 @@ public class CryptoCommandListener implements CommandListener {
     private String summarizeCrypto(Currency cryptoCurrency) {
         StringBuilder summary = new StringBuilder();
 
-        summary.append(CryptoInfoLoader.getGDAXPrice(new CurrencyPair(cryptoCurrency, Currency.USD)));
+        /*summary.append(CryptoInfoLoader.getGDAXPrice(new CurrencyPair(cryptoCurrency, Currency.USD)));
         summary.append(" / ");
         summary.append(CryptoInfoLoader.getGDAXPrice(new CurrencyPair(cryptoCurrency, Currency.EUR)));
         summary.append(" / ");
-        summary.append(CryptoInfoLoader.getGDAXPrice(new CurrencyPair(cryptoCurrency, Currency.BTC)));
+        summary.append(CryptoInfoLoader.getGDAXPrice(new CurrencyPair(cryptoCurrency, Currency.BTC)));*/
 
         return summary.toString();
     }

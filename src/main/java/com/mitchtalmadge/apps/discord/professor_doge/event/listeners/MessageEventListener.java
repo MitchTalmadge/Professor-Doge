@@ -3,10 +3,18 @@ package com.mitchtalmadge.apps.discord.professor_doge.event.listeners;
 import com.mitchtalmadge.apps.discord.professor_doge.command.Command;
 import com.mitchtalmadge.apps.discord.professor_doge.command.CommandDistributor;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class MessageEventListener implements EventListener<MessageReceivedEvent> {
+public class MessageEventListener extends EventListener<MessageReceivedEvent> {
 
-    public static final String COMMAND_PREFIX = ".pd";
+    private static final String COMMAND_PREFIX = ".pd";
+
+    private final CommandDistributor commandDistributor;
+
+    @Autowired
+    public MessageEventListener(CommandDistributor commandDistributor) {
+        this.commandDistributor = commandDistributor;
+    }
 
     @Override
     public void onEvent(MessageReceivedEvent event) {
@@ -23,7 +31,7 @@ public class MessageEventListener implements EventListener<MessageReceivedEvent>
 
                     // Create a command instance
                     Command command = new Command(event, args);
-                    CommandDistributor.onCommand(command);
+                    commandDistributor.onCommand(command);
                 }
         }
     }

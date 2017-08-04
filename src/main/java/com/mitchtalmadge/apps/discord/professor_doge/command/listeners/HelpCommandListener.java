@@ -5,7 +5,7 @@ import com.mitchtalmadge.apps.discord.professor_doge.command.CommandPattern;
 import com.mitchtalmadge.apps.discord.professor_doge.util.MessageUtils;
 
 @CommandPattern({"help"})
-public class HelpCommandListener implements CommandListener {
+public class HelpCommandListener extends CommandListener {
 
     @Override
     public String onCommand(Command command) {

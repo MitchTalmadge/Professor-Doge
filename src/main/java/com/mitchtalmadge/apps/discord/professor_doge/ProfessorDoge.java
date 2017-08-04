@@ -1,36 +1,34 @@
 package com.mitchtalmadge.apps.discord.professor_doge;
 
-import com.mitchtalmadge.apps.discord.professor_doge.event.EventDistributor;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import com.mitchtalmadge.apps.discord.professor_doge.util.InheritedComponent;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.security.auth.login.LoginException;
-
+@EnableScheduling
+@EnableAsync
+@ComponentScan(basePackages = "com.mitchtalmadge.apps.discord.professor_doge",
+        includeFilters = @ComponentScan.Filter(InheritedComponent.class))
+@SpringBootApplication
 public class ProfessorDoge {
 
-    private static final String DISCORD_TOKEN = System.getenv("DISCORD_TOKEN");
+    /**
+     * The ApplicationContext for the running Spring Boot application.
+     */
+    private static ApplicationContext applicationContext;
 
     public static void main(String... args) {
+        applicationContext = SpringApplication.run(ProfessorDoge.class, args);
+    }
 
-        if (DISCORD_TOKEN == null || DISCORD_TOKEN.isEmpty()) {
-            System.err.println("ERROR: Discord Token not found. Cannot start. Exiting.");
-            System.exit(-1);
-        }
-
-        try {
-            new JDABuilder(AccountType.BOT)
-                    .setToken(DISCORD_TOKEN)
-                    .addEventListener(new EventDistributor())
-                    .buildBlocking();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (RateLimitedException e) {
-            e.printStackTrace();
-        }
-
+    /**
+     * Shuts the application down gracefully.
+     */
+    public static void shutdown() {
+        SpringApplication.exit(applicationContext);
     }
 
 }

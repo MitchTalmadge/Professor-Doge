@@ -2,37 +2,31 @@ package com.mitchtalmadge.apps.discord.professor_doge.event;
 
 import com.mitchtalmadge.apps.discord.professor_doge.event.listeners.EventListener;
 import net.dv8tion.jda.core.events.Event;
-import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@Service
 public class EventDistributor implements net.dv8tion.jda.core.hooks.EventListener {
 
     /**
-     * Maps Event Distribution Listeners to their generic Event types.
+     * Maps Event Listeners to their generic Event types.
      */
-    private static final Map<Class<? extends Event>, EventListener> LISTENER_MAP = new HashMap<>();
+    private final Map<Class<? extends Event>, EventListener> eventListenerMap = new HashMap<>();
 
-    static {
-        // Find all listeners.
-        Set<Class<? extends EventListener>> listeners =
-                new Reflections(EventDistributor.class.getPackage().getName()).getSubTypesOf(EventListener.class);
-
-        // Instantiate and insert each Listener into the LISTENER_MAP.
-        listeners.forEach(c -> {
-            try {
-                EventListener eventListener = c.newInstance();
-                //noinspection unchecked
-                LISTENER_MAP.put(
-                        (Class<? extends Event>) ((ParameterizedType) c.getGenericInterfaces()[0]).getActualTypeArguments()[0],
-                        eventListener
-                );
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+    @Autowired
+    public EventDistributor(Set<EventListener> eventListeners) {
+        // Get the generic types and map them to the listeners.
+        eventListeners.forEach(eventListener -> {
+            //noinspection unchecked
+            eventListenerMap.put(
+                    (Class<? extends Event>) ((ParameterizedType) eventListener.getClass().getGenericSuperclass()).getActualTypeArguments()[0],
+                    eventListener
+            );
         });
     }
 
@@ -40,9 +34,9 @@ public class EventDistributor implements net.dv8tion.jda.core.hooks.EventListene
     public void onEvent(Event event) {
 
         // Look for a listener for the event.
-        if (LISTENER_MAP.containsKey(event.getClass())) {
+        if (eventListenerMap.containsKey(event.getClass())) {
             //noinspection unchecked
-            LISTENER_MAP.get(event.getClass()).onEvent(event);
+            eventListenerMap.get(event.getClass()).onEvent(event);
         }
 
     }

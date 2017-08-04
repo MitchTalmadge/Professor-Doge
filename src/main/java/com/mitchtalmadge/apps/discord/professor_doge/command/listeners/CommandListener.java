@@ -1,8 +1,10 @@
 package com.mitchtalmadge.apps.discord.professor_doge.command.listeners;
 
 import com.mitchtalmadge.apps.discord.professor_doge.command.Command;
+import com.mitchtalmadge.apps.discord.professor_doge.util.InheritedComponent;
 
-public interface CommandListener {
+@InheritedComponent
+public abstract class CommandListener {
 
     /**
      * Called when a command is received.
@@ -10,6 +12,6 @@ public interface CommandListener {
      * @param command The command that was received.
      * @return What the bot should say in reply. Null for no reply.
      */
-    String onCommand(Command command);
+    public abstract String onCommand(Command command);
 
 }

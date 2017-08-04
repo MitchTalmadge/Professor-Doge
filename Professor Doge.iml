@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -11,27 +16,54 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.5.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.5.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:1.5.6.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.1.11" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.1.11" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:log4j-over-slf4j:1.7.25" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.10.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="library" name="Maven: net.dv8tion:JDA:3.2.0_241" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
-    <orderEntry type="library" name="Maven: org.json:json:20160810" level="project" />
     <orderEntry type="library" name="Maven: net.sf.trove4j:trove4j:3.0.3" level="project" />
-    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.4.0" level="project" />
+    <orderEntry type="library" name="Maven: net.java.dev.jna:jna:4.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.neovisionaries:nv-websocket-client:2.2" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.8.1" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.13.0" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20170516" level="project" />
     <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-core:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: com.github.mmazi:rescu:1.9.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.9" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.9" level="project" />
     <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: net.iharder:base64:2.3.9" level="project" />
     <orderEntry type="library" name="Maven: oauth.signpost:signpost-core:1.2.1.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-bitfinex:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-bitstamp:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-bittrex:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-ccex:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-cexio:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-coinbase:4.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-gdax:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-gemini:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-kraken:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.knowm.xchange:xchange-poloniex:4.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.mindscapehq:core:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.mindscapehq:webprovider:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.11" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:20.0" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.21.0-GA" level="project" />

@@ -1,12 +1,13 @@
 package com.mitchtalmadge.apps.discord.professor_doge.command;
 
 import com.mitchtalmadge.apps.discord.professor_doge.command.listeners.CommandListener;
-import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Annotation;
-import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class CommandDistributor {
 
     private static final CommandPattern EMPTY_COMMAND_PATTERN = new CommandPattern() {
@@ -29,28 +30,11 @@ public class CommandDistributor {
     /**
      * All Command Distribution Listeners.
      */
-    private static final Set<CommandListener> LISTENERS = new HashSet<>();
+    private final Set<CommandListener> commandListeners;
 
-    static {
-        // Find all Command Distributor Listeners.
-        Set<Class<? extends CommandListener>> listeners =
-                new Reflections(CommandDistributor.class.getPackage().getName()).getSubTypesOf(CommandListener.class);
-
-        // Instantiate and insert each Listener into the LISTENERS set.
-        listeners.forEach(c -> {
-            try {
-                CommandListener listener = c.newInstance();
-                LISTENERS.add(listener);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    /**
-     * Default constructor made private to prevent accidental instantiation.
-     */
-    private CommandDistributor() {
+    @Autowired
+    public CommandDistributor(Set<CommandListener> commandListeners) {
+        this.commandListeners = commandListeners;
     }
 
     /**
@@ -58,12 +42,12 @@ public class CommandDistributor {
      *
      * @param command The command to distribute.
      */
-    public static void onCommand(Command command) {
+    public void onCommand(Command command) {
 
         // Try to find the most specific command listener.
         CommandPatternComparator commandPatternComparator = new CommandPatternComparator(command);
         CommandListener mostSpecificListener = null;
-        for (CommandListener listener : LISTENERS) {
+        for (CommandListener listener : commandListeners) {
             CommandPattern commandPattern = listener.getClass().getAnnotation(CommandPattern.class);
             if (commandPattern == null) {
                 System.err.println("Command Distribution Listener '" + listener.getClass().getSimpleName() + "' is missing a Command Pattern.");
