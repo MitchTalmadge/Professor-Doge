@@ -39,18 +39,18 @@ public class DiscordService {
     }
 
     @PostConstruct
-    private void init() {
+    private void init() throws LoginException {
         try {
             jda = new JDABuilder(AccountType.BOT)
                     .setToken(discordToken)
                     .addEventListener(eventDistributor)
                     .buildBlocking();
         } catch (LoginException e) {
-            e.printStackTrace();
+            throw e;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logService.logException(getClass(), e, "JDA was interrupted while logging in");
         } catch (RateLimitedException e) {
-            e.printStackTrace();
+            logService.logException(getClass(), e, "JDA could not login due to rate limiting");
         }
     }
 

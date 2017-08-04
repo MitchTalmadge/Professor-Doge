@@ -22,7 +22,7 @@ public class ProfessorDoge {
             ConfigurableApplicationContext applicationContext = SpringApplication.run(ProfessorDoge.class, args);
         } catch (BeanCreationException e) {
             if (e.getBeanName().equalsIgnoreCase(DiscordService.class.getSimpleName())) {
-                System.err.println("ERROR: DiscordService failed to start. Is DISCORD_TOKEN defined?");
+                System.err.println("ERROR: DiscordService failed to start. Is DISCORD_TOKEN defined and correct?");
                 System.exit(-1);
             } else {
                 e.printStackTrace();
