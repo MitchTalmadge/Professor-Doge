@@ -125,7 +125,6 @@
             <version>4.2.1</version>
         </dependency>
 
-
         <!-- Raygun -->
         <dependency>
             <groupId>com.mindscapehq</groupId>
@@ -147,6 +146,13 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.7</version>
+        </dependency>
+
+        <!-- Graphing -->
+        <dependency>
+            <groupId>com.mitchtalmadge</groupId>
+            <artifactId>asciigraph</artifactId>
+            <version>1.0.3</version>
         </dependency>
 
         <!-- Utils -->
