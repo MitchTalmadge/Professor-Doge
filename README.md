@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/MitchTalmadge/Professor-Doge.svg?branch=master)](https://travis-ci.org/MitchTalmadge/Professor-Doge)
 [![GitHub issues](https://img.shields.io/github/issues/MitchTalmadge/Professor-Doge.svg)](https://github.com/MitchTalmadge/Professor-Doge/issues)
 
-<img src="http://i.imgur.com/KdF2tKJ.png" width="140px" align="left"/>
+<img src="http://i.imgur.com/5LVkbE9.png" width="100px" align="left"/>
 
 Professor Doge is a silly Discord bot with an emphasis on cryptocurrency information. 
 
