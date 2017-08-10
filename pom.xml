@@ -6,7 +6,7 @@
 
     <groupId>com.mitchtalmadge.apps.discord</groupId>
     <artifactId>professor_doge</artifactId>
-    <version>0.0.0</version>
+    <version>develop-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
