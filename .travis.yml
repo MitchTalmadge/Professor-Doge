@@ -1,4 +1,12 @@
 language: java
 cache:
   directories:
-    - "$HOME/.m2"
+  - "$HOME/.m2"
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  api_key:
+    secure: Iyd3M7GFrKbsbtXUtI7Ih/TsjPx4nodFxJhCWHPd4TrXcVEHPmA5Q3Ydgydhjp6eSVR6MkG+qaROF6bU0z2AbJM5M7/QyQIw32ZQUY40noLKDZrFFATZFuQxDdAlTfKD3EKvtbSGnInXz8o3+lYJc5MhENU2Caa47fAQgEgxRo88xChMIK6eO/Mj00dw5nWTwLKWHFjkDprpvzYycHCUEFZGq1xfkbJwsjI0qGkQdPqErDczkrRtvZSehxcNRFpSzBZMYkgmt8gXfpyWmXMtVhgzgrEpDYqCdQ/4/0JC4Bq/TjeSd8VBZPtM2saIMwdk90fBaNzo42A0GViOz7+SY2BSVtL2mCJPS6V5TXGGYlA/06uri1ZO/xZdfBbPuKEbHa0bZa0+JH8n2k8jNbNdawflyD9vMi3w6Fk5cuUZ73qvdsAiHESyvmr7ZZLwlTIhGNL+oIsYGMsemRzKh9lKjAAtR6ZC3Ir+zHttpYUCKeQIWNy/kOpxjIek+fm+PUagNfP30CY2T49zWqd5ThYriiwnV/BtiDq346bl0K06J5IxzpSbQV6LB8ZPpADGVHx9NfXxFmRV1VRMrgDDXDiHRWFqW8SbqUWYQPxtpHhnGqcWFJKs6wyAo4OwSAZ1Fbz/gUVS0x76+1p0502/whoRxI3QinLH+cHmVhYBu1dU3Fw=
+  app: mitchtalmadge-professor-doge
+  on:
+    tags: true
