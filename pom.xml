@@ -12,6 +12,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <xchange.version>4.2.1</xchange.version>
     </properties>
 
     <build>
@@ -72,57 +73,47 @@
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-bitfinex</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-bitstamp</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-bittrex</artifactId>
-            <version>4.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.knowm.xchange</groupId>
-            <artifactId>xchange-ccex</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-cexio</artifactId>
-            <version>4.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.knowm.xchange</groupId>
-            <artifactId>xchange-coinbase</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-gdax</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-gemini</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-kraken</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
         <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-poloniex</artifactId>
-            <version>4.2.1</version>
+            <version>${xchange.version}</version>
         </dependency>
 
         <!-- Raygun -->
@@ -162,10 +153,18 @@
             <version>0.9.11</version>
         </dependency>
         <dependency>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
+            <version>3.2.7.Final</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
 </project>

@@ -1,8 +1,10 @@
 package com.mitchtalmadge.apps.discord.professor_doge;
 
 import com.mitchtalmadge.apps.discord.professor_doge.service.DiscordService;
+import com.mitchtalmadge.apps.discord.professor_doge.service.LogService;
 import com.mitchtalmadge.apps.discord.professor_doge.util.InheritedComponent;
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,6 +17,13 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(includeFilters = @ComponentScan.Filter(InheritedComponent.class))
 @SpringBootApplication
 public class ProfessorDoge {
+
+    private final LogService logService;
+
+    @Autowired
+    public ProfessorDoge(LogService logService) {
+        this.logService = logService;
+    }
 
     public static void main(String... args) {
         try {
